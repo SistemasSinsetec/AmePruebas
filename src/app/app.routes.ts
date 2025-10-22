@@ -1,44 +1,41 @@
 import { Routes } from '@angular/router';
-import path from 'path';
+import { LayoutComponent } from './layout/layout.component';
 
 export const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full',
-  },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
 
-  //login
+  // 🔸 Login sin layout
   {
     path: 'login',
     loadComponent: () => import('./auth/login/login.component').then((m) => m.LoginComponent),
   },
 
-  //REGISTRO (carga diferida)
+  // 🔸 Registro
   {
     path: 'registro',
     loadComponent: () =>
       import('./auth/register/register.component').then((m) => m.RegisterComponent),
   },
 
-  //RESTABLECER CONTRASEÑA (carga diferida)
+  // 🔸 Reset password
   {
     path: 'password',
     loadComponent: () => import('./auth/reset/reset.component').then((m) => m.ResetComponent),
   },
 
-  //SOLICITUDES (carga diferida)
+  // 🔹 Rutas internas con layout
   {
-    path: 'solicitudes',
-    loadComponent: () =>
-      import('./solicitdes/servicios.component').then((m) => m.RegisterSolicitudesComponent),
+    path: '',
+    component: LayoutComponent,
+    children: [
+      {
+        path: 'solicitudes',
+        loadComponent: () =>
+          import('./solicitdes/servicios.component').then((m) => m.RegisterSolicitudesComponent),
+      },
+      { path: '', redirectTo: 'solicitudes', pathMatch: 'full' },
+    ],
   },
 
-  //Cualquier ruta no válida redirige al login
-  {
-    path: '**',
-    redirectTo: 'login',
-  },
+  { path: '**', redirectTo: 'login' },
 ];
-
-//https://github.com/SistemasSinsetec/AmePruebas.git

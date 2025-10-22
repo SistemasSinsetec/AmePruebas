@@ -1,5 +1,7 @@
+import 'zone.js'; // 👈 ESTA LÍNEA ES CLAVE
+
 import { bootstrapApplication } from '@angular/platform-browser';
+import { AppComponent } from './app/app';
 import { appConfig } from './app/app.config';
-import { AppComponent } from './app/app'; // 👈 Cambiado de { App } a { AppComponent }
 
 bootstrapApplication(AppComponent, appConfig).catch((err) => console.error(err));

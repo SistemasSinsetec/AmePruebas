@@ -1,0 +1,21 @@
+<nb-layout windowMode>
+  <!-- CABECERA -->
+  <nb-layout-header fixed>
+    <div class="header-container">
+      <button nbButton ghost (click)="sidebar.toggle()">
+        <nb-icon icon="menu-outline"></nb-icon>
+      </button>
+      <span class="app-title">Panel Principal</span>
+    </div>
+  </nb-layout-header>
+
+  <!-- SIDEBAR -->
+  <nb-sidebar tag="menu-sidebar" state="expanded" #sidebar>
+    <nb-menu [items]="items"></nb-menu>
+  </nb-sidebar>
+
+  <!-- CONTENIDO CENTRAL -->
+  <nb-layout-column>
+    <router-outlet></router-outlet>
+  </nb-layout-column>
+</nb-layout>

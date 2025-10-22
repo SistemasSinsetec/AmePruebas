@@ -1,0 +1,32 @@
+nb-layout {
+  height: 100vh;
+}
+
+nb-layout-header {
+  display: flex;
+  align-items: center;
+  background-color: var(--header-bg, #2e3a59);
+  color: white;
+  font-weight: bold;
+  padding: 0 1rem;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.app-title {
+  margin-left: 10px;
+  font-size: 1.1rem;
+}
+
+nb-sidebar {
+  background-color: var(--sidebar-bg, #1a2138);
+}
+
+nb-layout-column {
+  background-color: #f4f6fb;
+  padding: 1rem;
+}

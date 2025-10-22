@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../servicios/auth.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { AuthService } from '../servicios/auth.service';
   standalone: true,
   imports: [FormsModule, RouterModule],
   templateUrl: './login.component.html',
-  styleUrls: ['../auth-styles.css'], // ✅ Ruta al CSS compartido
+  styleUrls: ['../auth-styles.css'],
 })
 export class LoginComponent {
   loginUser = '';
@@ -16,15 +16,14 @@ export class LoginComponent {
   resultado = '';
   cargando = false;
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
   async login() {
-    if (this.cargando) return; // evita doble clic
+    if (this.cargando) return;
 
     this.cargando = true;
 
     try {
-      // 🔹 Llamada al servicio
       const respuesta = await this.auth.enviar(
         [
           ['0x02', '0x03'],
@@ -32,17 +31,18 @@ export class LoginComponent {
           ['0x11', this.loginPass],
         ],
         'login'
-      ); //50seg muy tarde
+      );
 
-      // 🔹 Muestra directamente la respuesta del servidor
-      this.resultado = respuesta
-        ? `🟢 Respuesta recibida:\n${respuesta}`
-        : '⚠️ No se recibió respuesta del servidor.';
+      // 🔹 Si el servidor responde correctamente, navega
+      if (respuesta) {
+        console.log('🟢 Login exitoso, redirigiendo...');
+        this.router.navigateByUrl('/solicitudes');
+      } else {
+        this.resultado = '⚠️ No se recibió respuesta del servidor.';
+      }
     } catch (err: any) {
-      // 🔹 Captura errores de conexión u otros
       this.resultado = `❌ Error al iniciar sesión: ${err.message || err}`;
     } finally {
-      // 🔹 Siempre se ejecuta al final (reactiva botón)
       this.cargando = false;
     }
   }
