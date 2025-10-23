@@ -1,21 +1,26 @@
-<nb-layout windowMode>
-  <!-- CABECERA -->
-  <nb-layout-header fixed>
-    <div class="header-container">
-      <button nbButton ghost (click)="sidebar.toggle()">
-        <nb-icon icon="menu-outline"></nb-icon>
-      </button>
-      <span class="app-title">Panel Principal</span>
-    </div>
-  </nb-layout-header>
+<div class="layout">
+  <!-- Header fijo (amarillo) -->
+  <header class="header">
+    <button class="menu-toggle" (click)="toggleMenu()">☰</button>
+    <h1>Panel de Solicitudes</h1>
+    <button class="logout" (click)="logout()">↦ Salir</button>
+  </header>
 
-  <!-- SIDEBAR -->
-  <nb-sidebar tag="menu-sidebar" state="expanded" #sidebar>
-    <nb-menu [items]="items"></nb-menu>
-  </nb-sidebar>
+  <!-- Panel verde fijo -->
+  <aside class="sidebar-fixed"></aside>
 
-  <!-- CONTENIDO CENTRAL -->
-  <nb-layout-column>
-    <router-outlet></router-outlet>
-  </nb-layout-column>
-</nb-layout>
+  <!-- Panel azul que aparece encima del verde -->
+  <aside class="tools-panel" [class.open]="menuOpen">
+    <nav>
+      <ul>
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#">Solicitudes</a></li>
+        <li><a href="#">Reportes</a></li>
+        <li><a href="#">Configuración</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Contenido principal -->
+  <main class="main-content"></main>
+</div>

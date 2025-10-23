@@ -1,32 +1,123 @@
-nb-layout {
-  height: 100vh;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-nb-layout-header {
+html,
+body {
+  height: 100%;
+  background: #f4f6ff;
+}
+
+/* ===== HEADER (amarillo) ===== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: rgb(173, 171, 171);
+  color: #333;
   display: flex;
   align-items: center;
-  background-color: var(--header-bg, #2e3a59);
-  color: white;
+  justify-content: space-between;
+  padding: 0 20px;
   font-weight: bold;
-  padding: 0 1rem;
+  z-index: 1000;
 }
 
-.header-container {
-  display: flex;
-  align-items: center;
-  width: 100%;
+.menu-toggle {
+  background: rgb(173, 171, 171);
+  color: black;
+  border: none;
+  font-size: 20px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.app-title {
-  margin-left: 10px;
-  font-size: 1.1rem;
+.menu-toggle:hover {
+  background: rgb(173, 171, 171);
 }
 
-nb-sidebar {
-  background-color: var(--sidebar-bg, #1a2138);
+.logout {
+  background: none;
+  border: none;
+  color: #333;
+  cursor: pointer;
 }
 
-nb-layout-column {
-  background-color: #f4f6fb;
-  padding: 1rem;
+/* ===== PANEL VERDE FIJO ===== */
+.sidebar-fixed {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 220px;
+  height: calc(100vh - 60px);
+  background: rgb(173, 171, 171); /* verde */
+  padding-top: 15px;
+  z-index: 900;
+}
+
+.sidebar-fixed ul {
+  list-style: none;
+}
+
+.sidebar-fixed ul li a {
+  display: block;
+  color: #000;
+  text-decoration: none;
+  padding: 12px 20px;
+  font-weight: 500;
+}
+
+.sidebar-fixed ul li a:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* ===== PANEL AZUL (se superpone sobre el verde) ===== */
+.tools-panel {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 0;
+  height: calc(100vh - 60px);
+  background: #007ea7;
+  color: white;
+  overflow: hidden;
+  z-index: 950; /* encima del verde */
+  transition: width 0.3s ease;
+}
+
+.tools-panel.open {
+  width: 220px; /* mismo ancho que el verde */
+}
+
+.tools-panel nav ul {
+  list-style: none;
+}
+
+.tools-panel nav ul li a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: 12px 20px;
+  font-weight: 500;
+}
+
+.tools-panel nav ul li a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ===== CONTENIDO PRINCIPAL ===== */
+.main-content {
+  position: absolute;
+  top: 60px;
+  left: 220px;
+  right: 0;
+  bottom: 0;
+  background: white;
+  padding: 20px;
+  overflow-y: auto;
 }

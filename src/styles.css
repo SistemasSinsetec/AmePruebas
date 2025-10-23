@@ -1,1 +1,20 @@
-/* You can add global styles to this file, and also import other style files */
+/* ==== 🔧 Fix global Nebular icons size ==== */
+nb-icon {
+  width: 1.2rem !important;
+  height: 1.2rem !important;
+  font-size: 1.2rem !important;
+  line-height: 1 !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Para prevenir escalado anormal de SVG dentro de nb-icon */
+nb-icon svg {
+  width: 1.2rem !important;
+  height: 1.2rem !important;
+  display: block !important;
+}
