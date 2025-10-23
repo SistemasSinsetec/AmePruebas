@@ -31,7 +31,7 @@ export const routes: Routes = [
       {
         path: 'solicitudes',
         loadComponent: () =>
-          import('./solicitdes/servicios.component').then((m) => m.ServiciosComponent),
+          import('./solicitdes/servicios.component').then((m) => m.RegisterSolicitudesComponent),
       },
       { path: '', redirectTo: 'solicitudes', pathMatch: 'full' },
     ],

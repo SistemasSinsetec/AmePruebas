@@ -1,0 +1,148 @@
+<nb-card>
+  <nb-card-header>
+    <h3>Formulario de Solicitud de Servicio</h3>
+  </nb-card-header>
+
+  <nb-card-body>
+    <div class="form-grid">
+      <div class="form-field">
+        <label>Cliente *</label>
+        <input
+          nbInput
+          fullWidth
+          type="text"
+          placeholder="Nombre del cliente"
+          [(ngModel)]="solicitud.cliente"
+        />
+      </div>
+
+      <div class="form-field">
+        <label>Solicitante *</label>
+        <input
+          nbInput
+          fullWidth
+          type="text"
+          placeholder="Persona que solicita"
+          [(ngModel)]="solicitud.solicitante"
+        />
+      </div>
+
+      <div class="form-field">
+        <label>Representante *</label>
+        <input
+          nbInput
+          fullWidth
+          type="text"
+          placeholder="Representante autorizado"
+          [(ngModel)]="solicitud.representante"
+        />
+      </div>
+
+      <div class="form-field">
+        <label>Ubicación</label>
+        <input
+          nbInput
+          fullWidth
+          type="text"
+          placeholder="Dirección o área"
+          [(ngModel)]="solicitud.ubicacion"
+        />
+      </div>
+
+      <div class="form-field full">
+        <label>Descripción del servicio</label>
+        <textarea
+          nbInput
+          fullWidth
+          rows="3"
+          placeholder="Describe brevemente el servicio requerido..."
+          [(ngModel)]="solicitud.descripcionServicio"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button nbButton status="primary" (click)="nextStep()">Siguiente →</button>
+    </div>
+
+    <hr />
+
+    <div class="actions mb-2">
+      <button nbButton status="success" (click)="addPartida()">➕ Añadir partida</button>
+    </div>
+
+    <div *ngFor="let p of partidas; let i = index" class="partida">
+      <nb-card>
+        <nb-card-header>
+          Partida {{ i + 1 }}
+          <button
+            nbButton
+            size="tiny"
+            status="danger"
+            *ngIf="partidas.length > 1"
+            (click)="eliminarPartida(i)"
+          >
+            Eliminar
+          </button>
+        </nb-card-header>
+
+        <nb-card-body>
+          <div class="form-grid">
+            <div class="form-field">
+              <label>Tipo de trabajo</label>
+              <input nbInput fullWidth type="text" [(ngModel)]="p.tipoTrabajo" />
+            </div>
+
+            <div class="form-field">
+              <label>Naturaleza</label>
+              <input nbInput fullWidth type="text" [(ngModel)]="p.naturalezaTrabajo" />
+            </div>
+
+            <div class="form-field">
+              <label>Máquina</label>
+              <input nbInput fullWidth type="text" [(ngModel)]="p.tipoMaquina" />
+            </div>
+
+            <div class="form-field">
+              <label>Fecha</label>
+              <input nbInput fullWidth type="date" [(ngModel)]="p.fecha" />
+            </div>
+
+            <div class="form-field">
+              <label>Cantidad</label>
+              <input nbInput fullWidth type="number" min="1" [(ngModel)]="p.cantidad" />
+            </div>
+
+            <div class="form-field">
+              <label>Precio</label>
+              <input
+                nbInput
+                fullWidth
+                type="number"
+                min="0"
+                step="0.01"
+                [(ngModel)]="p.precioUnitario"
+              />
+            </div>
+
+            <div class="form-field full">
+              <label>Comentario</label>
+              <textarea nbInput fullWidth rows="2" [(ngModel)]="p.comentario"></textarea>
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+
+    <div class="totales">
+      <p><strong>Subtotal:</strong> {{ subtotal | currency }}</p>
+      <p><strong>IVA:</strong> {{ ivaTotal | currency }}</p>
+      <p class="total"><strong>Total:</strong> {{ total | currency }}</p>
+    </div>
+
+    <div class="actions">
+      <button nbButton status="info" (click)="prevStep()">← Anterior</button>
+      <button nbButton status="success" (click)="onSubmit()">💾 Guardar</button>
+    </div>
+  </nb-card-body>
+</nb-card>

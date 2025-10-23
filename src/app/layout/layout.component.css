@@ -112,7 +112,6 @@ body {
 
 /* ===== CONTENIDO PRINCIPAL ===== */
 .main-content {
-  position: absolute;
   top: 60px;
   left: 220px;
   right: 0;
