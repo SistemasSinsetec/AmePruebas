@@ -99,3 +99,23 @@ button.btn-primary:hover {
 .auth-reset h2 {
   color: #fd7e14;
 }
+
+.password-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.toggle-pass {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: -2rem;
+  color: #ccc;
+  font-size: 1.2rem;
+  transition: color 0.2s ease-in-out;
+}
+
+.toggle-pass:hover {
+  color: #fff;
+}

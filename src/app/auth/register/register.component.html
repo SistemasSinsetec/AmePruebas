@@ -1,39 +1,110 @@
 <div class="auth-container auth-register">
   <h2>Crear cuenta</h2>
 
-  <form (ngSubmit)="register()">
+  <form (ngSubmit)="register()" #regForm="ngForm" novalidate>
+    <!-- Usuario -->
     <div class="form-group">
       <label for="user">Usuario</label>
-      <input id="user" type="text" [(ngModel)]="regUser" name="regUser" required />
+      <input
+        id="user"
+        type="text"
+        name="regUser"
+        [(ngModel)]="regUser"
+        required
+        minlength="3"
+        #userCtrl="ngModel"
+      />
+      <small *ngIf="userCtrl.invalid && userCtrl.touched">
+        El usuario es obligatorio (mínimo 3 caracteres).
+      </small>
     </div>
 
+    <!-- Nombre -->
     <div class="form-group">
       <label for="name">Nombre</label>
-      <input id="name" type="text" [(ngModel)]="regName" name="regName" required />
+      <input
+        id="name"
+        type="text"
+        name="regName"
+        [(ngModel)]="regName"
+        required
+        #nameCtrl="ngModel"
+      />
+      <small *ngIf="nameCtrl.invalid && nameCtrl.touched"> El nombre es obligatorio. </small>
     </div>
 
+    <!-- Apellido -->
     <div class="form-group">
       <label for="last">Apellido</label>
-      <input id="last" type="text" [(ngModel)]="regLast" name="regLast" required />
+      <input
+        id="last"
+        type="text"
+        name="regLast"
+        [(ngModel)]="regLast"
+        required
+        #lastCtrl="ngModel"
+      />
+      <small *ngIf="lastCtrl.invalid && lastCtrl.touched"> El apellido es obligatorio. </small>
     </div>
 
+    <!-- Correo -->
     <div class="form-group">
       <label for="mail">Correo</label>
-      <input id="mail" type="email" [(ngModel)]="regMail" name="regMail" required />
+      <input
+        id="mail"
+        type="email"
+        name="regMail"
+        [(ngModel)]="regMail"
+        required
+        email
+        #mailCtrl="ngModel"
+      />
+      <small *ngIf="mailCtrl.hasError('email') && mailCtrl.touched">
+        Correo electrónico no válido.
+      </small>
     </div>
 
-    <div class="form-group">
+    <!-- Contraseña -->
+    <div class="form-group password-group">
       <label for="pass">Contraseña</label>
-      <input id="pass" type="password" [(ngModel)]="regPass" name="regPass" required />
+      <div class="password-wrapper">
+        <input
+          id="pass"
+          [type]="mostrarPass ? 'text' : 'password'"
+          name="regPass"
+          [(ngModel)]="regPass"
+          required
+          minlength="8"
+          #passCtrl="ngModel"
+        />
+
+        <!-- Botón ojo: Bootstrap Icons -->
+        <button
+          type="button"
+          class="toggle-pass"
+          (click)="mostrarPass = !mostrarPass"
+          [attr.aria-label]="mostrarPass ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+        >
+          <i [class]="mostrarPass ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+        </button>
+      </div>
+      <small *ngIf="passCtrl.invalid && passCtrl.touched">
+        La contraseña debe tener al menos 8 caracteres.
+      </small>
     </div>
 
-    <button type="submit" class="btn-primary">Registrarse</button>
+    <!-- Botón de registro -->
+    <button type="submit" class="btn-primary" [disabled]="regForm.invalid || cargando">
+      {{ cargando ? 'Registrando...' : 'Registrarse' }}
+    </button>
 
+    <!-- Mensaje -->
+    <div *ngIf="resultado" class="msg">{{ resultado }}</div>
+
+    <!-- Enlaces -->
     <div class="links">
       <a routerLink="/login">Ya tengo cuenta</a>
       <a routerLink="/password">¿Olvidaste tu contraseña?</a>
     </div>
   </form>
-
-  <pre class="resultado">{{ resultado }}</pre>
 </div>
