@@ -21,7 +21,7 @@ export class ResetComponent {
   async resetPassword() {
     if (this.cargando) return; // evita doble clic
     this.cargando = true;
-    this.resultado = '⏳ Enviando solicitud de recuperación...';
+    //this.resultado = '⏳ Enviando solicitud de recuperación...';
 
     try {
       this.resultado = await this.auth.enviar(

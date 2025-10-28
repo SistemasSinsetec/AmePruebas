@@ -3,12 +3,12 @@ import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private api = 'https://apps.sinsetec.com.mx/sst-svc-servicios/';
-  //http://localhost/BD-Sinsetec/sstSolicitudes.php
+  private api = 'http://localhost/sst-svc-servicios/src/srvc/sstServicios.php';
+  //'https://apps.sinsetec.com.mx/sst-svc-servicios/';
 
   async enviar(campos: [string, string][], tipo: string): Promise<string> {
     const f = new FormData();
-    f.append('0x01', '');
+    f.append('0x01', ''); // encabezado genérico
     if (location.hostname.includes('localhost')) f.append('0xfa', 'true');
     campos.forEach(([k, v]) => f.append(k, v));
 
@@ -18,7 +18,7 @@ export class AuthService {
       const txt = await res.text();
       return JSON.stringify(this.parse(txt), null, 2);
     } catch (e: any) {
-      return `❌ Error en ${tipo}: ${e.message}`;
+      return ` Error en ${tipo}: ${e.message}`;
     }
   }
 
